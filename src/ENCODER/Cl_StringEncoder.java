@@ -1,51 +1,57 @@
 package ENCODER;
 
-import static Constants.translationConstants.*;
+import static CONSTANTS.translationConstants.*;
+import static CONSTANTS.NumericConstants.*;
 
 public class Cl_StringEncoder implements If_StringEncoder{
 
-    final int maxOctave = 10;
-    final int defaultOctave = 5;
-    final int RADIX = 10;
-    private int currOctave = 5;
-    private int currVolume = 40;
-    private int currInstrumentVal = 1;
+    private int currOctave = DefaultOctave;
+    private int currVolume = DefaultVolume;
+    private int currInstrumentVal = DefaultInstrumentValue;
 
     @Override
     public String parseString(String Song) {
-        int currPosInParsed = 0;
+        boolean lastWasNote = false;
+        char lastNote = ' ';
         String instrument;
         String parsedSong = "";
 
         for (int i = 0; i < Song.length(); i++) {
             switch(Song.charAt(i)){
                 case La:
-                    parsedSong += 'A';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += La;
+                    lastNote = La;
+                    lastWasNote = true;
                 break;
                 case Si:
-                    parsedSong += 'B';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Si;
+                    lastNote = Si;
+                    lastWasNote = true;
                 break;
                 case Do:
-                    parsedSong += 'C';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Do;
+                    lastNote = Do;
+                    lastWasNote = true;
                 break;
                 case Re:
-                    parsedSong += 'D';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Re;
+                    lastNote = Re;
+                    lastWasNote = true;
                 break;
                 case Mi:
-                    parsedSong += 'E';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Mi;
+                    lastNote = Mi;
+                    lastWasNote = true;
                 break;
                 case Fa:
-                    parsedSong += 'F';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Fa;
+                    lastNote = Fa;
+                    lastWasNote = true;
                 break;
                 case Sol:
-                    parsedSong += 'G';
-                    currPosInParsed = currPosInParsed + 1;
+                    parsedSong += Sol;
+                    lastNote = Sol;
+                    lastWasNote = true;
                 break;
                 case LowerA:
                 case LowerB:
@@ -54,13 +60,15 @@ public class Cl_StringEncoder implements If_StringEncoder{
                 case LowerE:
                 case LowerF:
                 case LowerG:
-                    if( i > 0 && isLastPosNote(i, Song)){
-                        parsedSong += Song.charAt(i-1);
+                    if(lastWasNote){
+                        parsedSong += lastNote;
+                        lastWasNote = true;
                     }
                     else{
-                        parsedSong += 'R';
+                        parsedSong += Pause;
+                        lastWasNote = false;
                     }
-                    currPosInParsed = currPosInParsed + 1;
+
                     break;
                 case LowerO:
                 case LowerU:
@@ -69,49 +77,56 @@ public class Cl_StringEncoder implements If_StringEncoder{
                 case UpperU:
                 case UpperI:
                     instrument = "I[HARPSICHORD]";
-                    currInstrumentVal = 7;
+                    currInstrumentVal = HarpsiChord;
                     parsedSong = parsedSong.concat(instrument);
-                    currPosInParsed = currPosInParsed + instrument.length();
+
+                    lastWasNote = false;
                 break;
-                case Space:
-                    if(currVolume * 2 > 127){
-                        currVolume = 40;
+                case IncreaseVolume:
+                    if(currVolume * 2 > MaximalVolume){
+                        currVolume = DefaultVolume;
                     }
                     else{
                         currVolume *= 2;
                     }
                     String addedString = ":CON(7, " + currVolume + ")";
                     parsedSong = parsedSong.concat(addedString);
-                    currPosInParsed = currPosInParsed + addedString.length();
+
+                    lastWasNote = false;
                 break;
-                case Exclamation:
+                case SwitchToAgogo:
                     instrument = "I[AGOGO]";
-                    currInstrumentVal = 114;
+                    currInstrumentVal = Agogo;
                     parsedSong = parsedSong.concat(instrument);
-                    currPosInParsed = currPosInParsed + instrument.length();
+
+                    lastWasNote = false;
                 break;
-                case Question:
+                case IncreaseOctave:
                     currOctave += 1;
-                    if(currOctave >= maxOctave)
-                        currOctave = defaultOctave;
+                    if(currOctave >= MaxOctave)
+                        currOctave = DefaultOctave;
+                    lastWasNote = false;
                 break;
-                case NL:
+                case SwitchToTubularBells:
                     instrument = "I[TUBULAR_BELLS]";
-                    currInstrumentVal = 15;
+                    currInstrumentVal = TubularBells;
                     parsedSong = parsedSong.concat(instrument);
-                    currPosInParsed = currPosInParsed + instrument.length();
+
+                    lastWasNote = false;
                 break;
-                case Semicolon:
+                case SwitchToPanFlute:
                     instrument = "I[PAN_FLUTE]";
-                    currInstrumentVal = 76;
+                    currInstrumentVal = PanFlute;
                     parsedSong = parsedSong.concat(instrument);
-                    currPosInParsed = currPosInParsed + instrument.length();
+
+                    lastWasNote = false;
                 break;
-                case Comma:
+                case SwitchToChurchOrgan:
                     instrument = "I[CHURCH_ORGAN]";
-                    currInstrumentVal = 20;
+                    currInstrumentVal = ChurchOrgan;
                     parsedSong = parsedSong.concat(instrument);
-                    currPosInParsed = currPosInParsed + instrument.length();
+
+                    lastWasNote = false;
                 break;
                 default:
                     if(Character.isDigit(Song.charAt(i))){
@@ -121,46 +136,39 @@ public class Cl_StringEncoder implements If_StringEncoder{
                             i = i + 1;
                         }
                         String newInstrument = String.valueOf(currInstrumentVal + Integer.parseInt(numValue.toString(), RADIX));
-                        if(Integer.parseInt(newInstrument) < 128 && Integer.parseInt(newInstrument) >= 0){
+                        if(Integer.parseInt(newInstrument) < MaximalInstrumentValue && Integer.parseInt(newInstrument) >= DefaultInstrumentValue){
                             instrument = "I" + newInstrument + " ";
                         }
                         else{
                             instrument = "I0 ";
                         }
                         parsedSong = parsedSong.concat(instrument);
-                        currPosInParsed = currPosInParsed + instrument.length();
+
+                        lastWasNote = false;
                     }
                     else{
-                        if(i > 0 && isLastPosNote(i, Song)){
-                            parsedSong += Song.charAt(i-1);
+                        if(lastWasNote){
+                            parsedSong += lastNote;
+                            lastWasNote = true;
                         }
                         else{
-                            parsedSong += 'R';
+                            parsedSong += Pause;
+                            lastWasNote = false;
                         }
                     }
                 break;
             }
-            currPosInParsed = currPosInParsed + 1;
-            if(isLastPosNote(i + 1, Song)) {
+
+            if(lastWasNote) {
                 parsedSong += String.valueOf(currOctave);
-                currPosInParsed = currPosInParsed + 1;
+
             }
             parsedSong += ' ';
         }
 
-        currVolume = 40;
-        currOctave = 5;
-        currInstrumentVal = 0;
+        currVolume = DefaultVolume;
+        currOctave = DefaultOctave;
+        currInstrumentVal = DefaultInstrumentValue;
         return parsedSong;
-    }
-
-    private boolean isLastPosNote(int i, String Song){
-        return Song.charAt(i - 1) == Do ||
-                Song.charAt(i - 1) == Re ||
-                Song.charAt(i - 1) == Mi ||
-                Song.charAt(i - 1) == Fa ||
-                Song.charAt(i - 1) == Sol ||
-                Song.charAt(i - 1) == La ||
-                Song.charAt(i - 1) == Si;
     }
 }

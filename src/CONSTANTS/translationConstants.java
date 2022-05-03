@@ -1,4 +1,4 @@
-package Constants;
+package CONSTANTS;
 
 public class translationConstants {
     public static final char La = 'A';
@@ -8,9 +8,14 @@ public class translationConstants {
     public static final char Mi = 'E';
     public static final char Fa = 'F';
     public static final char Sol = 'G';
-    public static final char Space = ' ';
-    public static final char Exclamation = '!';
-    public static final char Question = '?';
+    public static final char Pause = 'R';
+    public static final char IncreaseVolume = ' ';
+    public static final char SwitchToAgogo = '!';
+    public static final char IncreaseOctave = '?';
+    public static final char SwitchToPanFlute = ';';
+    public static final char SwitchToChurchOrgan = ',';
+    public static final char SwitchToTubularBells = '\n';
+
     public static final char UpperO = 'O';
     public static final char LowerO = 'o';
     public static final char UpperU = 'U';
@@ -24,7 +29,4 @@ public class translationConstants {
     public static final char LowerE = 'e';
     public static final char LowerF = 'f';
     public static final char LowerG = 'g';
-    public static final char Semicolon = ';';
-    public static final char Comma = ',';
-    public static final char NL = '\n';
 }
