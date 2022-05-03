@@ -7,16 +7,20 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import org.jfugue.pattern.Pattern;
 
+import ENCODER.Cl_StringEncoder;
+
 
 public class Cl_MusicHandler implements If_MusicHandler{
 
     private String encodedSong = null;
+    private String originalSongString = null;
+    private Cl_StringEncoder stringEncoder = new Cl_StringEncoder();
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(encodedSong);
-        if(encodedSong != null){
+        if(originalSongString != null){
             Player player = new Player();
+            encodedSong = stringEncoder.parseString(originalSongString);
             Pattern pattern = new Pattern(encodedSong);
             player.play(pattern);
         }//add else warning statement
@@ -26,7 +30,7 @@ public class Cl_MusicHandler implements If_MusicHandler{
     public void insertUpdate(@NotNull DocumentEvent e) {
         int songSize = e.getDocument().getLength();
         try {
-            encodedSong = e.getDocument().getText(0, songSize);
+            originalSongString = e.getDocument().getText(0, songSize);
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
@@ -34,14 +38,14 @@ public class Cl_MusicHandler implements If_MusicHandler{
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-        encodedSong = null;
+        originalSongString = null;
     }
 
     @Override
     public void changedUpdate(@NotNull DocumentEvent e) {
         int songSize = e.getDocument().getLength();
         try {
-            encodedSong = e.getDocument().getText(0, songSize);
+            originalSongString = e.getDocument().getText(0, songSize);
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
