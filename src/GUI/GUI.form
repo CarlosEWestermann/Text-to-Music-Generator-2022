@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.GUI">
-  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="761" height="578"/>
+      <xy x="20" y="20" width="645" height="585"/>
     </constraints>
     <properties>
       <minimumSize width="600" height="400"/>
@@ -12,7 +12,7 @@
     <children>
       <component id="1bfd5" class="javax.swing.JTextArea" binding="textArea">
         <constraints>
-          <grid row="0" column="0" row-span="3" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="400" height="500"/>
             <preferred-size width="400" height="500"/>
             <maximum-size width="400" height="500"/>
@@ -22,67 +22,34 @@
           <text value="Enter your text to be musified here!"/>
         </properties>
       </component>
-      <component id="59088" class="javax.swing.JTextField" binding="volumeField">
+      <component id="56480" class="javax.swing.JTextPane" binding="InstructionsPane">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-4494801"/>
+          <contentType value="text/plain"/>
+          <text value="BOTAR INSTRUÇÕES DE USO AQUI!!!"/>
+        </properties>
+      </component>
+      <component id="d13cb" class="javax.swing.JButton" binding="loadTextButton">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="150" height="30"/>
-            <preferred-size width="150" height="30"/>
+            <preferred-size width="154" height="30"/>
             <maximum-size width="150" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="1b302" class="javax.swing.JTextField" binding="BPMField">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="150" height="30"/>
-            <preferred-size width="150" height="30"/>
-            <maximum-size width="150" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="863b9" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="50" height="30"/>
-            <preferred-size width="50" height="30"/>
-            <maximum-size width="50" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Volume"/>
-        </properties>
-      </component>
-      <component id="5f1d0" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="50" height="30"/>
-            <preferred-size width="50" height="30"/>
-            <maximum-size width="50" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="BPM"/>
-        </properties>
-      </component>
-      <component id="d409e" class="javax.swing.JButton" binding="QUITButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false">
-            <minimum-size width="120" height="30"/>
-            <preferred-size width="120" height="30"/>
-            <maximum-size width="120" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="QUIT"/>
+          <horizontalTextPosition value="10"/>
+          <text value="LOAD TEXT"/>
         </properties>
       </component>
       <component id="112f1" class="javax.swing.JButton" binding="PlayButton">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="150" height="30"/>
             <preferred-size width="150" height="30"/>
             <maximum-size width="150" height="30"/>
@@ -92,42 +59,28 @@
           <text value="PLAY"/>
         </properties>
       </component>
-      <component id="df8d" class="javax.swing.JProgressBar" binding="songProgressBar">
+      <component id="4a94" class="javax.swing.JButton" binding="SaveMIDIButton">
         <constraints>
-          <grid row="3" column="1" row-span="2" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="bf3ae" class="javax.swing.JList" binding="instrumentList">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="300" height="400"/>
-            <preferred-size width="300" height="400"/>
-            <maximum-size width="300" height="400"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="150" height="30"/>
+            <preferred-size width="154" height="30"/>
+            <maximum-size width="150" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <background color="-8222327"/>
-          <model>
-            <item value="GUITAR"/>
-            <item value="PIANO"/>
-            <item value="BASS"/>
-            <item value="VIOLIN"/>
-            <item value="TRUMPET"/>
-            <item value="FLUTE"/>
-          </model>
+          <text value="SAVE MIDI"/>
         </properties>
       </component>
-      <component id="d13cb" class="javax.swing.JButton" binding="saveTextButton" default-binding="true">
+      <component id="d409e" class="javax.swing.JButton" binding="QUITButton" default-binding="true">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="150" height="30"/>
             <preferred-size width="150" height="30"/>
             <maximum-size width="150" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <text value="Save Text"/>
+          <text value="QUIT"/>
         </properties>
       </component>
     </children>

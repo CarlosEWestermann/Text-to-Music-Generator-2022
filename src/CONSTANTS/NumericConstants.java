@@ -3,7 +3,7 @@ package CONSTANTS;
 public class NumericConstants {
     public static final int MaxOctave = 10;
     public static final int DefaultOctave = 5;
-    public static final int DefaultVolume = 25;
+    public static final int DefaultVolume = 23;
     public static final int MaximalVolume = 127;
     public static final int DefaultInstrumentValue = 0;
     public static final int MaximalInstrumentValue = 128;

@@ -12,16 +12,21 @@ import ENCODER.Cl_StringEncoder;
 
 public class Cl_MusicHandler implements If_MusicHandler{
 
-    private String encodedSong = null;
     private String originalSongString = null;
-    private Cl_StringEncoder stringEncoder = new Cl_StringEncoder();
+    private final Cl_StringEncoder stringEncoder = new Cl_StringEncoder();
+    private Pattern currentPattern;
+
+    public Pattern getCurrentPattern() {
+        return currentPattern;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(originalSongString != null){
             Player player = new Player();
-            encodedSong = stringEncoder.parseString(originalSongString);
+            String encodedSong = stringEncoder.parseString(originalSongString);
             Pattern pattern = new Pattern(encodedSong);
+            currentPattern = pattern;
             player.play(pattern);
         }//add else warning statement
     }
@@ -50,4 +55,6 @@ public class Cl_MusicHandler implements If_MusicHandler{
             ex.printStackTrace();
         }
     }
+
+
 }
