@@ -1,7 +1,7 @@
-package ENCODER;
+package encoder;
 
-import static CONSTANTS.translationConstants.*;
-import static CONSTANTS.NumericConstants.*;
+import static constants.translationConstants.*;
+import static constants.NumericConstants.*;
 
 public class Cl_StringEncoder implements If_StringEncoder{
 
@@ -12,6 +12,25 @@ public class Cl_StringEncoder implements If_StringEncoder{
     boolean lastWasNote;
     private char lastNote;
 
+    public char getLastNote() {
+        return lastNote;
+    }
+
+    public boolean lastWasNote() {
+        return lastWasNote;
+    }
+
+    public int getCurrInstrumentVal() {
+        return currInstrumentVal;
+    }
+
+    public int getCurrOctave() {
+        return currOctave;
+    }
+
+    public int getCurrVolume() {
+        return currVolume;
+    }
 
     @Override
     public String parseString(String Song) {
@@ -96,15 +115,7 @@ public class Cl_StringEncoder implements If_StringEncoder{
 
                 default:
                     if(Character.isDigit(Song.charAt(i))){
-                        String StringifiedValueOfInstrument = findNumericValueInSong(i, Song);
-                        i += StringifiedValueOfInstrument.length();
-                        int newInstrument = currInstrumentVal + Integer.parseInt(StringifiedValueOfInstrument, RADIX);
-                        if(newInstrument < MaximalInstrumentValue && newInstrument >= DefaultInstrumentValue){
-                            encodeInstrument(newInstrument);
-                        }
-                        else{
-                            encodeInstrument(0);
-                        }
+                        updateInstrumentFromNumeric(i, Song);
                     }
                     else{
                         if(lastWasNote){
@@ -160,13 +171,14 @@ public class Cl_StringEncoder implements If_StringEncoder{
         lastWasNote = false;
     }
 
-    private String findNumericValueInSong(int currentIndex, String Song){
-        StringBuilder numValue = new StringBuilder();
-        while(Character.isDigit(Song.charAt(currentIndex))){
-            numValue.append(Song.charAt(currentIndex));
-            currentIndex = currentIndex + 1;
+    private void updateInstrumentFromNumeric(int currentIndex, String Song){
+        int newInstrument = currInstrumentVal + Character.getNumericValue(Song.charAt(currentIndex));
+        if(newInstrument < MaximalInstrumentValue && newInstrument >= DefaultInstrumentValue){
+            encodeInstrument(newInstrument);
         }
-        return numValue.toString();
+        else{
+            encodeInstrument(0);
+        }
     }
 
     private void addOctave(){

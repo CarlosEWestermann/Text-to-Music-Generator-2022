@@ -1,4 +1,4 @@
-package HANDLERS;
+package handlers;
 
 import java.awt.event.ActionEvent;
 

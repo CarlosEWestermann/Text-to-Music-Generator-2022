@@ -1,4 +1,4 @@
-package HANDLERS;
+package handlers;
 
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;

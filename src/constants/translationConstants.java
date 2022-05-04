@@ -1,4 +1,4 @@
-package CONSTANTS;
+package constants;
 
 public class translationConstants {
     public static final char La = 'A';
